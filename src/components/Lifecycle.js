@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-
+import SeasonDisplay from './SeasonDisplay'
+import Spinner from './Spinner'
 export default class Lifecycle extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
              latitude:'',
-             longitude:''
+             errorMessage:''
         }
     }
     componentDidMount(){
@@ -15,21 +16,25 @@ export default class Lifecycle extends Component {
                 this.setState({
                     latitude:position.coords.latitude,
                     longitude:position.coords.longitude
-                },console.log("Component mounted"))
+                },
+                err=>{
+                    this.setState({
+                        errorMessage:err
+                    })
+                })
             }
         )
     }
-    componentDidUpdate(){
-        console.log("component updated")
-    }
     
     render() {
-        console.log("component rendered")
-        return (
-            <div>
-                latitude:{this.state.latitude}<br/>
-                longitude:{this.state.longitude}
-            </div>
-        )
+        if(this.state.errorMessage && !this.state.latitude)
+        {
+            return <div>Error :{this.state.errorMessage}</div>
+        }
+        if(!this.state.errorMessage && this.state.latitude)
+        {
+        return  <SeasonDisplay lat={this.state.latitude}/>
+        }
+        return <Spinner/>
     }
 }
