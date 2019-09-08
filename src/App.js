@@ -6,11 +6,12 @@ import Lifecycle from './components/Lifecycle'
 import Clock from './components/Clock'
 import SearchBar from './components/SearchBar'
 import unsplash from './api/unsplash'
-// import ImageList from './components/ImageList'
+import ImageList from './components/ImageList'
+
 class App extends React.Component {
-  state={images:''}
+  state={images:[]}
    onSearchSubmit=async(term)=>{
-   const response= await unsplash.get('https://api.unsplash.com/search/photos',{
+   const response= await unsplash.get('/search/photos',{
     params:{query:term},
     })
     this.setState({
@@ -22,7 +23,7 @@ class App extends React.Component {
   return (
     <div className="App ui container " style={{marginTop:'10px'}}>
       <SearchBar onSubmit={this.onSearchSubmit}/>
-      {/* <ImageList images={this.state.images}/> */}
+      <ImageList images={this.state.images}/>
     </div>
   );
 }
