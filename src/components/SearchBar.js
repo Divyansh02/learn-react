@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class SearchBar extends Component {
     state={
-        term :'dafsfd'
+        term :''
     }
     inputHandler=(event)=>{
         this.setState({
