@@ -1,7 +1,45 @@
 import React, { Component } from "react";
 import "./Modal.css";
+import AssignmentStatus from './AssignmentStatus'
 
 export default class modal extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      arrayDivs: [
+        {
+          title: "Assignment 01",
+          id: 1,
+          date: "18 Sept",
+          delay: "On Time",
+          status: "72/ 100"
+        },
+        {
+          title: "Assignment 02",
+          id: 2,
+          date: "18 Sept",
+          delay: "On Time",
+          status: "72/ 100"
+        },
+        {
+          title: "Assignment 03",
+          id: 3,
+          date: "18 Sept",
+          delay: "On Time",
+          status: "72/ 100"
+        },
+        {
+          title: "Assignment 04",
+          id: 4,
+          date: "18 Sept",
+          delay: "On Time",
+          status: "72/ 100"
+        }
+      ]
+    };
+  }
+
   render() {
     return (
       <div className="modal-header">
@@ -12,53 +50,35 @@ export default class modal extends Component {
         <div>
           <p>Home / Assignments</p>
         </div>
-        <div className="header-list">
-          <ul>
-            <li>
-              2/9<p>Assignments Completed</p>
-            </li>
-            <li>
-              02<p>Tasks Pending</p>
-            </li>
-            <li>
-              Fair<p>Overall Ratings</p>
-            </li>
-          </ul>
-        </div>
+        <AssignmentStatus/>
+      {/* <div className="header-list">
+        <ul>
+          <li>
+            2/9<p>Assignments Completed</p>
+          </li>
+          <li>
+            02<p>Tasks Pending</p>
+          </li>
+          <li>
+            Fair<p>Overall Ratings</p>
+          </li>
+        </ul>
+      </div> */}
         <div className="assignment-box">
-          <div id="assignment-list">
-            <ul>
-              <li>Assignment 01</li>
-              <li>18 Sept</li>
-              <li>On time</li>
-              <li>72/ 100</li>
-            </ul>
-          </div>
-          <div id="assignment-list">
-            <ul>
-              <li>Assignment 01</li>
-              <li>18 Sept</li>
-              <li>On time</li>
-              <li>72/ 100</li>
-            </ul>
-          </div>
-          <div id="assignment-list">
-            <ul>
-              <li>Assignment 01</li>
-              <li>18 Sept</li>
-              <li>On time</li>
-              <li>72/ 100</li>
-            </ul>
-          </div>
-          <div id="assignment-list">
-            <ul>
-              <li>Assignment 01</li>
-              <li>18 Sept</li>
-              <li>On time</li>
-              <li>72/ 100</li>
-            </ul>
-          </div>
+          {this.state.arrayDivs.map((d, i) => {
+            return (
+              <div key={`rows-${i}`} id="assignment-list" key={i}>
+                <ul>
+                  {
+                    Object.keys(d).map((datum,i)=>
+                    <li key={`data-${i}`}>{d[datum]}</li>)
+                  }
+                </ul>
+              </div>
+            );
+          })}
         </div>
+        <div className="footer" />
       </div>
     );
   }

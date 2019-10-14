@@ -1,6 +1,6 @@
 .modal-header{
     width: 40%;
-    border: 2px solid red;
+    border: 2px solid rgb(197, 190, 190);
     border-radius: 20px;
     position: relative;
     top: 50%;
@@ -49,9 +49,19 @@ ul li p{
 }
 #assignment-list ul li{
     font-weight: lighter;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     
 }
 .assignment-box{
     width: 95%;
+}
+
+.footer{
+    width:90%;
+    margin: auto;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    padding: 0;
 }
