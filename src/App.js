@@ -1,17 +1,47 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Button from './components/Person';
-import Person from "./components/Person";
-import {testFunction} from "./components/Person";
-function App() {
-  return (
-    <div>
-      <input type="text" name="myInput" />
-      <button style={{color:'green'}} onClick={testFunction} >Verify</button>
-      <Person />
-    </div>
-  );
-}
+import React, { Component } from "react";
+export default class OuterClickExample extends Component {
+  constructor(props) {
+    super(props);
 
-export default App;
+    this.state = { isOpen: false };
+    this.toggleContainer = React.createRef();
+  }
+
+  componentDidMount() {
+    window.addEventListener("click", this.onClickOutsideHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.onClickOutsideHandler);
+  }
+
+  onClickHandler=()=> {
+    this.setState(currentState => ({
+      isOpen: !currentState.isOpen
+    }));
+  }
+
+  onClickOutsideHandler=(event)=> {
+    if (
+      this.state.isOpen &&
+      !this.toggleContainer.current.contains(event.target)
+    ) {
+      this.setState({ isOpen: false });
+    }
+  }
+
+  render() {
+    return (
+      <div ref={this.toggleContainer}>
+        <button onClick={this.onClickHandler}>Select an option</button>
+        {this.state.isOpen && (
+          <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+          </ul>
+        )}
+      </div>
+    );
+  }
+}

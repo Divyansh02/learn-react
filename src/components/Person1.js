@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-export default class Test extends Component {
+export default class Person extends Component {
+
     render() {
         return (
             <div>
-                <button >Test another function</button>
+            {this.props.clicked('Person 1')}
             </div>
         )
     }
